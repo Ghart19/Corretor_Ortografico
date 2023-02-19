@@ -3,7 +3,7 @@ import os
 # Dicionário que mapeia cada palavra correta a uma lista de palavras incorretas que podem ser corrigidas para a palavra correta
 corrections = {}
 
-# Dicionário que mapeia cada palavra correta já corrigida para True
+# Dicionário que mapeia cada palavra correta já corrigida
 correct_words = {}
 
 # Função para limpar a tela do terminal
