@@ -6,6 +6,7 @@ corrections = {}
 # Dicionário que mapeia cada palavra correta já corrigida
 correct_words = {}
 
+
 # Função para limpar a tela do terminal
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -16,13 +17,28 @@ def add_correction(correct_word, wrong_word):
         corrections[correct_word] = [wrong_word]
     else:
         corrections[correct_word] += [wrong_word]
-    print('Palavra adicionada com sucesso!')
 
 # Função que verifica se a palavra 'error' pode ser corrigida e retorna a palavra correta, caso exista
 def correct_error(error):
     for correct_word, wrong_words in corrections.items():
         if error in wrong_words:
             return correct_word
+
+
+# Esta função carrega um banco de palavras a partir de um arquivo txt
+def load_word_database(filename):
+    with open(filename, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if line:
+                correct_word, wrong_words_str = line.split(':')
+                wrong_words = [w.strip() for w in wrong_words_str.split(',')]
+                for wrong_word in wrong_words:
+                    add_correction(correct_word, wrong_word)
+
+
+# Carrega as correções do banco de dados de palavras
+load_word_database('word_database.txt')
 
 # Loop principal
 while True:
